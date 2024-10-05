@@ -1,25 +1,21 @@
 package activity;
 
-import org.junit.Before;
-import org.junit.Test;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import activity.FraudDetectionSystem.FraudCheckResult;
 import activity.FraudDetectionSystem.Transaction;
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import static org.junit.Assert.*;
-import static org.junit.jupiter.api.Assertions.assertAll;
-
 
 public class FraudDetectionSystemTest {
 
     private FraudDetectionSystem sut;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         sut = new FraudDetectionSystem();
     }
