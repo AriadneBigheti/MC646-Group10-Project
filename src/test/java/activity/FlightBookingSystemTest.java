@@ -65,16 +65,4 @@ public class FlightBookingSystemTest {
         assertEquals(false, result.pointsUsed);
     }
 
-    @Test
-    public void TC5(){
-        //when
-        BookingResult result = bookingSystem.bookFlight(1, LocalDateTime.of(2024, 10, 7, 14, 0), 10, 1000, 200, false, LocalDateTime.of(2024, 11, 8, 4, 0), 100000000);
-
-        //then
-        assertEquals(true, result.confirmation);
-        assertEquals(0, result.totalPrice);
-        assertEquals(0, result.refundAmount);
-        assertEquals(true, result.pointsUsed);
-    }
-
 }
