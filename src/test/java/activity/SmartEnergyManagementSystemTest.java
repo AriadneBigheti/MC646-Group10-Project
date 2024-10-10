@@ -6,11 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.Test;
 
 import activity.SmartEnergyManagementSystem.DeviceSchedule;
 import activity.SmartEnergyManagementSystem.EnergyManagementResult;
@@ -19,7 +17,7 @@ public class SmartEnergyManagementSystemTest {
 
     private SmartEnergyManagementSystem smartSystem;
 
-    @BeforeEach
+    @Before
     public void setUp() {
         smartSystem = new SmartEnergyManagementSystem();
     }
@@ -47,7 +45,7 @@ public class SmartEnergyManagementSystemTest {
         assertTrue(result.deviceStatus.getOrDefault("Lights", false));
         assertTrue(result.energySavingMode);
         assertFalse(result.temperatureRegulationActive);
-        assertEquals(result.totalEnergyUsed, totalEnergyUsedToday);
+        assertEquals(result.totalEnergyUsed, totalEnergyUsedToday, 0.1);
     }
 
     @Test
@@ -73,7 +71,7 @@ public class SmartEnergyManagementSystemTest {
         assertTrue(result.deviceStatus.getOrDefault("Security", false));
         assertFalse(result.energySavingMode);
         assertFalse(result.temperatureRegulationActive);
-        assertEquals(result.totalEnergyUsed, totalEnergyUsedToday);
+        assertEquals(result.totalEnergyUsed, totalEnergyUsedToday, 0.1);
     }
 
     @Test
@@ -99,7 +97,7 @@ public class SmartEnergyManagementSystemTest {
         assertTrue(result.deviceStatus.getOrDefault("Heating", false));
         assertFalse(result.energySavingMode);
         assertTrue(result.temperatureRegulationActive);
-        assertEquals(result.totalEnergyUsed, totalEnergyUsedToday);
+        assertEquals(result.totalEnergyUsed, totalEnergyUsedToday, 0.1);
     }
 
     @Test
@@ -124,7 +122,7 @@ public class SmartEnergyManagementSystemTest {
         assertTrue(result.deviceStatus.getOrDefault("Lights", false));
         assertFalse(result.energySavingMode);
         assertFalse(result.temperatureRegulationActive);
-        assertEquals(result.totalEnergyUsed, totalEnergyUsedToday);
+        assertEquals(result.totalEnergyUsed, totalEnergyUsedToday, 0.1);
     }
 
     @Test
@@ -152,7 +150,7 @@ public class SmartEnergyManagementSystemTest {
         assertFalse(result.deviceStatus.getOrDefault("Lights", true));
         assertTrue(result.energySavingMode);
         assertFalse(result.temperatureRegulationActive);
-        assertEquals(result.totalEnergyUsed, totalEnergyUsedToday);
+        assertEquals(result.totalEnergyUsed, totalEnergyUsedToday,0.1);
     }
 
     @Test
@@ -180,7 +178,7 @@ public class SmartEnergyManagementSystemTest {
         assertTrue(result.deviceStatus.getOrDefault("Refrigerator", false));
         assertFalse(result.energySavingMode);
         assertFalse(result.temperatureRegulationActive);
-        assertEquals(result.totalEnergyUsed, totalEnergyUsedToday);
+        assertEquals(result.totalEnergyUsed, totalEnergyUsedToday, 0.1);
     }
 
     @Test
@@ -206,7 +204,7 @@ public class SmartEnergyManagementSystemTest {
         assertTrue(result.deviceStatus.getOrDefault("Heating", false));
         assertFalse(result.energySavingMode);
         assertTrue(result.temperatureRegulationActive);
-        assertEquals(result.totalEnergyUsed, totalEnergyUsedToday);
+        assertEquals(result.totalEnergyUsed, totalEnergyUsedToday, 0.1);
     }
 
     @Test
@@ -234,6 +232,6 @@ public class SmartEnergyManagementSystemTest {
         assertFalse(result.deviceStatus.getOrDefault("Security", true));
         assertTrue(result.energySavingMode);
         assertFalse(result.temperatureRegulationActive);
-        assertEquals(result.totalEnergyUsed, totalEnergyUsedToday);
+        assertEquals(result.totalEnergyUsed, totalEnergyUsedToday, 0.1);
     }
 }

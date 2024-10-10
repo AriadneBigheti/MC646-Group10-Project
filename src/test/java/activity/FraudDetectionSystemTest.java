@@ -4,9 +4,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.Test;
 
 import activity.FraudDetectionSystem.FraudCheckResult;
 import activity.FraudDetectionSystem.Transaction;
@@ -15,13 +15,13 @@ public class FraudDetectionSystemTest {
 
     private FraudDetectionSystem sut;
 
-    @BeforeEach
+    @Before
     public void setUp() {
         sut = new FraudDetectionSystem();
     }
 
     @Test
-    void testHighAmountTransaction() {
+    public void testHighAmountTransaction() {
         // given
         Transaction transaction = new Transaction(11000, LocalDateTime.now(), "Campinas");
         List<Transaction> transactionsList = new ArrayList<>();
@@ -37,7 +37,7 @@ public class FraudDetectionSystemTest {
     }
 
     @Test
-    void testExcessiveTransactionsWithinLastHour() {
+    public void testExcessiveTransactionsWithinLastHour() {
         // given
         Transaction transaction = new Transaction(100, LocalDateTime.now(), "Campinas");
         List<String> blackList = new ArrayList<>();
@@ -57,7 +57,7 @@ public class FraudDetectionSystemTest {
     }
 
     @Test
-    void testLocationChangeWithinShortTime() {
+    public void testLocationChangeWithinShortTime() {
         // given
         Transaction transaction = new Transaction(100, LocalDateTime.now(), "Campinas");
         List<Transaction> transactionsList = new ArrayList<>();
@@ -74,7 +74,7 @@ public class FraudDetectionSystemTest {
     }
 
     @Test
-    void testTransactionInBlacklistedLocation() {
+    public void testTransactionInBlacklistedLocation() {
         // given
         Transaction transaction = new Transaction(100, LocalDateTime.now(), "Campinas");
         List<Transaction> transactionsList = new ArrayList<>();
@@ -90,7 +90,7 @@ public class FraudDetectionSystemTest {
     }
 
     @Test
-    void testNormalTransaction() {
+    public void testNormalTransaction() {
         LocalDateTime now = LocalDateTime.now();
         Transaction transaction = new Transaction(500, now, "Campinas");
         List<Transaction> transactionsList = new ArrayList<>();
