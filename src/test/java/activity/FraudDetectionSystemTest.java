@@ -39,12 +39,13 @@ public class FraudDetectionSystemTest {
     @Test
     public void testExcessiveTransactionsWithinLastHour() {
         // given
-        Transaction transaction = new Transaction(100, LocalDateTime.now(), "Campinas");
+        LocalDateTime now = LocalDateTime.now();
+        Transaction transaction = new Transaction(100, now, "Campinas");
         List<String> blackList = new ArrayList<>();
         List<Transaction> transactionsList = new ArrayList<>();
     
         for (int i = 0; i < 11; i++) {
-            transactionsList.add(new Transaction(50, LocalDateTime.now().minusMinutes(i+10), "Campinas"));
+            transactionsList.add(new Transaction(50, now.minusMinutes(60), "Campinas"));
         }
 
         // when
@@ -92,9 +93,12 @@ public class FraudDetectionSystemTest {
     @Test
     public void testNormalTransaction() {
         LocalDateTime now = LocalDateTime.now();
-        Transaction transaction = new Transaction(500, now, "Campinas");
+        Transaction transaction = new Transaction(10000, now, "Campinas");
         List<Transaction> transactionsList = new ArrayList<>();
-        transactionsList.add(new Transaction(1000, now.minusHours(3), "Campinas"));
+        for (int i = 0; i < 9; i++) {
+            transactionsList.add(new Transaction(1000, now.minusMinutes(i), "Campinas"));
+        }
+        transactionsList.add(new Transaction(1000, now.minusMinutes(30), "Sao Paulo"));
         List<String> blackList = new ArrayList<>();
         blackList.add("Sao Paulo");
 
