@@ -2,7 +2,7 @@ package activity;
 
 import java.time.LocalDateTime;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -56,12 +56,24 @@ public class FlightBookingSystemTest {
     @Test
     public void TC4(){
         //when
-        BookingResult result = bookingSystem.bookFlight(3, LocalDateTime.of(2024, 10, 7, 14, 0), 10, 1000, 200, true, LocalDateTime.of(2024, 11, 8, 4, 0), 0);
+        BookingResult result = bookingSystem.bookFlight(3, LocalDateTime.of(2024, 10, 7, 14, 0), 10, 1000, 200, true, LocalDateTime.of(2024, 10, 9, 14, 0), 0);
 
         //then
         assertEquals(false, result.confirmation);
         assertEquals(0, result.totalPrice, 0.1);
         assertEquals(4800, result.refundAmount, 0.1);
+        assertEquals(false, result.pointsUsed);
+    }
+
+     @Test
+    public void TC5(){
+        //when
+        BookingResult result = bookingSystem.bookFlight(4, LocalDateTime.of(2024, 10, 7, 14, 0), 4, 1000, 200, false, LocalDateTime.of(2024, 10, 8, 14, 0), 0);
+
+        //then
+        assertEquals(true, result.confirmation);
+        assertEquals(6400, result.totalPrice, 0.1);
+        assertEquals(0, result.refundAmount, 0.1);
         assertEquals(false, result.pointsUsed);
     }
 
