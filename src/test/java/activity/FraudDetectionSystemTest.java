@@ -4,9 +4,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.Test;
 
 import activity.FraudDetectionSystem.FraudCheckResult;
 import activity.FraudDetectionSystem.Transaction;
@@ -15,13 +15,13 @@ public class FraudDetectionSystemTest {
 
     private FraudDetectionSystem sut;
 
-    @BeforeEach
+    @Before
     public void setUp() {
         sut = new FraudDetectionSystem();
     }
 
     @Test
-    void testHighAmountTransaction() {
+    public void testHighAmountTransaction() {
         // given
         Transaction transaction = new Transaction(11000, LocalDateTime.now(), "Campinas");
         List<Transaction> transactionsList = new ArrayList<>();
@@ -37,14 +37,15 @@ public class FraudDetectionSystemTest {
     }
 
     @Test
-    void testExcessiveTransactionsWithinLastHour() {
+    public void testExcessiveTransactionsWithinLastHour() {
         // given
-        Transaction transaction = new Transaction(100, LocalDateTime.now(), "Campinas");
+        LocalDateTime now = LocalDateTime.now();
+        Transaction transaction = new Transaction(100, now, "Campinas");
         List<String> blackList = new ArrayList<>();
         List<Transaction> transactionsList = new ArrayList<>();
     
         for (int i = 0; i < 11; i++) {
-            transactionsList.add(new Transaction(50, LocalDateTime.now().minusMinutes(i+10), "Campinas"));
+            transactionsList.add(new Transaction(50, now.minusMinutes(60), "Campinas"));
         }
 
         // when
@@ -57,7 +58,7 @@ public class FraudDetectionSystemTest {
     }
 
     @Test
-    void testLocationChangeWithinShortTime() {
+    public void testLocationChangeWithinShortTime() {
         // given
         Transaction transaction = new Transaction(100, LocalDateTime.now(), "Campinas");
         List<Transaction> transactionsList = new ArrayList<>();
@@ -74,7 +75,7 @@ public class FraudDetectionSystemTest {
     }
 
     @Test
-    void testTransactionInBlacklistedLocation() {
+    public void testTransactionInBlacklistedLocation() {
         // given
         Transaction transaction = new Transaction(100, LocalDateTime.now(), "Campinas");
         List<Transaction> transactionsList = new ArrayList<>();
@@ -90,11 +91,14 @@ public class FraudDetectionSystemTest {
     }
 
     @Test
-    void testNormalTransaction() {
+    public void testNormalTransaction() {
         LocalDateTime now = LocalDateTime.now();
-        Transaction transaction = new Transaction(500, now, "Campinas");
+        Transaction transaction = new Transaction(10000, now, "Campinas");
         List<Transaction> transactionsList = new ArrayList<>();
-        transactionsList.add(new Transaction(1000, now.minusHours(3), "Campinas"));
+        for (int i = 0; i < 9; i++) {
+            transactionsList.add(new Transaction(1000, now.minusMinutes(i), "Campinas"));
+        }
+        transactionsList.add(new Transaction(1000, now.minusMinutes(30), "Sao Paulo"));
         List<String> blackList = new ArrayList<>();
         blackList.add("Sao Paulo");
 
